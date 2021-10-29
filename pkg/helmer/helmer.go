@@ -74,8 +74,7 @@ func init() {
 	settings.Debug = true
 	settings.MaxHistory = 10
 
-	getterProviders = getter.All(settings)
-
+	getterProviders = append(getter.All(settings), fileProvider, configMapProvider)
 }
 
 func AddorUpdateRepo(entry *repo.Entry) error {
