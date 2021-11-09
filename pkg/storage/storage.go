@@ -40,6 +40,10 @@ func CheckConfigMapEntry(key string, ins types.NamespacedName) (string, error) {
 		return "", err
 	}
 
+	if !found {
+		return "", nil
+	}
+
 	if value, found := data[key]; found {
 		return value.(string), nil
 	}
