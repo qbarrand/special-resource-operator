@@ -64,7 +64,7 @@ func SetupDaemonSet(obj *unstructured.Unstructured) error {
 	}
 
 	if err = setupContainersProxy(containers); err != nil {
-		return errors.Wrap(err, "Cannot set proxy for Pod")
+		return fmt.Errorf("cannot set proxy for Pod: %w", err)
 	}
 
 	return nil
@@ -81,7 +81,7 @@ func SetupPod(obj *unstructured.Unstructured) error {
 	}
 
 	if err = setupContainersProxy(containers); err != nil {
-		return errors.Wrap(err, "Cannot set proxy for Pod")
+		return fmt.Errorf("cannot set proxy for Pod: %w", err)
 	}
 
 	return nil
