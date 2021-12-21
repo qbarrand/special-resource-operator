@@ -11,6 +11,8 @@ import (
 	"sigs.k8s.io/controller-runtime/pkg/client"
 )
 
+//go:generate mockgen -source=storage.go -package=storage -destination=mock_storage_api.go
+
 type Storage interface {
 	CheckConfigMapEntry(string, types.NamespacedName) (string, error)
 	UpdateConfigMapEntry(string, string, types.NamespacedName) error
