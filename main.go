@@ -21,7 +21,6 @@ import (
 
 	srov1beta1 "github.com/kubernetes-sigs/special-resource-operator/api/v1beta1"
 	"github.com/kubernetes-sigs/special-resource-operator/cmd/cli"
-	"github.com/kubernetes-sigs/special-resource-operator/cmd/leaderelection"
 	"github.com/kubernetes-sigs/special-resource-operator/controllers"
 	"github.com/kubernetes-sigs/special-resource-operator/pkg/assets"
 	"github.com/kubernetes-sigs/special-resource-operator/pkg/clients"
@@ -77,7 +76,6 @@ func main() {
 
 	if cl.EnableLeaderElection {
 		opts.LeaderElection = cl.EnableLeaderElection
-		opts = leaderelection.ApplyOpenShiftOptions(opts)
 	}
 
 	mgr, err := ctrl.NewManager(ctrl.GetConfigOrDie(), *opts)
