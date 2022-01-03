@@ -5,9 +5,9 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/openshift-psap/special-resource-operator/pkg/cache"
-	"github.com/openshift-psap/special-resource-operator/pkg/clients"
-	"github.com/openshift-psap/special-resource-operator/pkg/state"
+	"github.com/kubernetes-sigs/special-resource-operator/pkg/cache"
+	"github.com/kubernetes-sigs/special-resource-operator/pkg/clients"
+	"github.com/kubernetes-sigs/special-resource-operator/pkg/state"
 	"github.com/pkg/errors"
 	apierrors "k8s.io/apimachinery/pkg/api/errors"
 	"k8s.io/apimachinery/pkg/apis/meta/v1/unstructured"

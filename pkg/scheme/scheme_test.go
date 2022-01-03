@@ -6,7 +6,7 @@ import (
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/ginkgo/extensions/table"
 	. "github.com/onsi/gomega"
-	"github.com/openshift-psap/special-resource-operator/pkg/scheme"
+	"github.com/kubernetes-sigs/special-resource-operator/pkg/scheme"
 	buildV1 "github.com/openshift/api/build/v1"
 	imageV1 "github.com/openshift/api/image/v1"
 	routev1 "github.com/openshift/api/route/v1"

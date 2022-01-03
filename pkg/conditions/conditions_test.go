@@ -6,7 +6,7 @@ import (
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/ginkgo/extensions/table"
 	. "github.com/onsi/gomega"
-	"github.com/openshift-psap/special-resource-operator/pkg/conditions"
+	"github.com/kubernetes-sigs/special-resource-operator/pkg/conditions"
 	configv1 "github.com/openshift/api/config/v1"
 	"github.com/openshift/library-go/pkg/config/clusteroperator/v1helpers"
 )

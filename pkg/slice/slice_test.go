@@ -7,7 +7,7 @@ import (
 	. "github.com/onsi/ginkgo/extensions/table"
 	. "github.com/onsi/gomega"
 	"github.com/onsi/gomega/types"
-	"github.com/openshift-psap/special-resource-operator/pkg/slice"
+	"github.com/kubernetes-sigs/special-resource-operator/pkg/slice"
 	"helm.sh/helm/v3/pkg/chart"
 )
 

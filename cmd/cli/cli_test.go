@@ -5,7 +5,7 @@ import (
 
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
-	"github.com/openshift-psap/special-resource-operator/cmd/cli"
+	"github.com/kubernetes-sigs/special-resource-operator/cmd/cli"
 )
 
 func TestCli(t *testing.T) {

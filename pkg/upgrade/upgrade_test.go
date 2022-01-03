@@ -14,9 +14,9 @@ import (
 	v1 "github.com/google/go-containerregistry/pkg/v1"
 	"github.com/google/go-containerregistry/pkg/v1/types"
 
-	"github.com/openshift-psap/special-resource-operator/pkg/cache"
-	"github.com/openshift-psap/special-resource-operator/pkg/cluster"
-	"github.com/openshift-psap/special-resource-operator/pkg/registry"
+	"github.com/kubernetes-sigs/special-resource-operator/pkg/cache"
+	"github.com/kubernetes-sigs/special-resource-operator/pkg/cluster"
+	"github.com/kubernetes-sigs/special-resource-operator/pkg/registry"
 )
 
 func TestPkgUpgrade(t *testing.T) {

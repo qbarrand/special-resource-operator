@@ -1,4 +1,4 @@
-module github.com/openshift-psap/special-resource-operator
+module github.com/kubernetes-sigs/special-resource-operator
 
 go 1.17
 

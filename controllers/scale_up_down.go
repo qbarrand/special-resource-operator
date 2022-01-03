@@ -4,9 +4,9 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/openshift-psap/special-resource-operator/pkg/cache"
-	"github.com/openshift-psap/special-resource-operator/pkg/clients"
-	"github.com/openshift-psap/special-resource-operator/pkg/state"
+	"github.com/kubernetes-sigs/special-resource-operator/pkg/cache"
+	"github.com/kubernetes-sigs/special-resource-operator/pkg/clients"
+	"github.com/kubernetes-sigs/special-resource-operator/pkg/state"
 	apierrors "k8s.io/apimachinery/pkg/api/errors"
 )
 

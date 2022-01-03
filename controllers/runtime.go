@@ -6,12 +6,12 @@ import (
 	"strings"
 	"time"
 
-	srov1beta1 "github.com/openshift-psap/special-resource-operator/api/v1beta1"
-	"github.com/openshift-psap/special-resource-operator/pkg/cache"
-	"github.com/openshift-psap/special-resource-operator/pkg/clients"
-	"github.com/openshift-psap/special-resource-operator/pkg/proxy"
-	"github.com/openshift-psap/special-resource-operator/pkg/upgrade"
-	"github.com/openshift-psap/special-resource-operator/pkg/warn"
+	srov1beta1 "github.com/kubernetes-sigs/special-resource-operator/api/v1beta1"
+	"github.com/kubernetes-sigs/special-resource-operator/pkg/cache"
+	"github.com/kubernetes-sigs/special-resource-operator/pkg/clients"
+	"github.com/kubernetes-sigs/special-resource-operator/pkg/proxy"
+	"github.com/kubernetes-sigs/special-resource-operator/pkg/upgrade"
+	"github.com/kubernetes-sigs/special-resource-operator/pkg/warn"
 	"github.com/pkg/errors"
 
 	"k8s.io/apimachinery/pkg/apis/meta/v1/unstructured"

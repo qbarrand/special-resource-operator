@@ -4,9 +4,9 @@ import (
 	"strings"
 
 	"github.com/go-logr/logr"
-	"github.com/openshift-psap/special-resource-operator/pkg/cache"
-	"github.com/openshift-psap/special-resource-operator/pkg/color"
-	"github.com/openshift-psap/special-resource-operator/pkg/hash"
+	"github.com/kubernetes-sigs/special-resource-operator/pkg/cache"
+	"github.com/kubernetes-sigs/special-resource-operator/pkg/color"
+	"github.com/kubernetes-sigs/special-resource-operator/pkg/hash"
 	"github.com/pkg/errors"
 	"k8s.io/apimachinery/pkg/apis/meta/v1/unstructured"
 	"sigs.k8s.io/controller-runtime/pkg/client"

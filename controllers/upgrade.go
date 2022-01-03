@@ -3,8 +3,8 @@ package controllers
 import (
 	"fmt"
 
-	"github.com/openshift-psap/special-resource-operator/pkg/cache"
-	"github.com/openshift-psap/special-resource-operator/pkg/color"
+	"github.com/kubernetes-sigs/special-resource-operator/pkg/cache"
+	"github.com/kubernetes-sigs/special-resource-operator/pkg/color"
 	ctrl "sigs.k8s.io/controller-runtime"
 )
 

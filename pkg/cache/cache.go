@@ -3,9 +3,9 @@ package cache
 import (
 	"context"
 
-	"github.com/openshift-psap/special-resource-operator/pkg/clients"
-	"github.com/openshift-psap/special-resource-operator/pkg/color"
-	"github.com/openshift-psap/special-resource-operator/pkg/warn"
+	"github.com/kubernetes-sigs/special-resource-operator/pkg/clients"
+	"github.com/kubernetes-sigs/special-resource-operator/pkg/color"
+	"github.com/kubernetes-sigs/special-resource-operator/pkg/warn"
 	"github.com/pkg/errors"
 	"k8s.io/apimachinery/pkg/apis/meta/v1/unstructured"
 	"sigs.k8s.io/controller-runtime/pkg/client"

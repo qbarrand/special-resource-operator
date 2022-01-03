@@ -20,7 +20,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/apis/meta/v1/unstructured"
 
-	helmerv1beta1 "github.com/openshift-psap/special-resource-operator/pkg/helmer/api/v1beta1"
+	helmerv1beta1 "github.com/kubernetes-sigs/special-resource-operator/pkg/helmer/api/v1beta1"
 )
 
 // SpecialResourceImages defines the observed state of SpecialResource

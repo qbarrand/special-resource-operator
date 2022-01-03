@@ -18,8 +18,8 @@ import (
 	"k8s.io/client-go/tools/clientcmd"
 	"sigs.k8s.io/controller-runtime/pkg/client"
 
-	srov1beta1 "github.com/openshift-psap/special-resource-operator/api/v1beta1"
-	"github.com/openshift-psap/special-resource-operator/test/framework"
+	srov1beta1 "github.com/kubernetes-sigs/special-resource-operator/api/v1beta1"
+	"github.com/kubernetes-sigs/special-resource-operator/test/framework"
 	configv1 "github.com/openshift/api/config/v1"
 	ocv1 "github.com/openshift/api/config/v1"
 	appsv1 "k8s.io/api/apps/v1"

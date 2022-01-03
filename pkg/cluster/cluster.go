@@ -7,10 +7,10 @@ import (
 	"strings"
 
 	"github.com/go-logr/logr"
-	"github.com/openshift-psap/special-resource-operator/pkg/cache"
-	"github.com/openshift-psap/special-resource-operator/pkg/clients"
-	"github.com/openshift-psap/special-resource-operator/pkg/color"
-	"github.com/openshift-psap/special-resource-operator/pkg/osversion"
+	"github.com/kubernetes-sigs/special-resource-operator/pkg/cache"
+	"github.com/kubernetes-sigs/special-resource-operator/pkg/clients"
+	"github.com/kubernetes-sigs/special-resource-operator/pkg/color"
+	"github.com/kubernetes-sigs/special-resource-operator/pkg/osversion"
 	configv1 "github.com/openshift/api/config/v1"
 	machinev1 "github.com/openshift/machine-config-operator/pkg/apis/machineconfiguration.openshift.io/v1"
 

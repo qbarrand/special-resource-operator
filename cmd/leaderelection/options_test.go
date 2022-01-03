@@ -6,7 +6,7 @@ import (
 
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
-	"github.com/openshift-psap/special-resource-operator/cmd/leaderelection"
+	"github.com/kubernetes-sigs/special-resource-operator/cmd/leaderelection"
 	ctrl "sigs.k8s.io/controller-runtime"
 )
 

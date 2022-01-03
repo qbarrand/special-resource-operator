@@ -1,7 +1,7 @@
 package warn
 
 import (
-	"github.com/openshift-psap/special-resource-operator/pkg/color"
+	"github.com/kubernetes-sigs/special-resource-operator/pkg/color"
 	"sigs.k8s.io/controller-runtime/pkg/log/zap"
 )
 

@@ -7,7 +7,7 @@ import (
 	. "github.com/onsi/ginkgo/extensions/table"
 	. "github.com/onsi/gomega"
 	"github.com/onsi/gomega/types"
-	"github.com/openshift-psap/special-resource-operator/pkg/hash"
+	"github.com/kubernetes-sigs/special-resource-operator/pkg/hash"
 	"k8s.io/apimachinery/pkg/apis/meta/v1/unstructured"
 )
 
