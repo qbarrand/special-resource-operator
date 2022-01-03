@@ -1,4 +1,4 @@
-domain: openshift.io
+domain: kubernetes.io
 layout: go.kubebuilder.io/v2
 projectName: special-resource-operator
 repo: github.com/kubernetes-sigs/special-resource-operator
