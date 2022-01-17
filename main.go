@@ -19,7 +19,8 @@ package main
 import (
 	"os"
 
-	srov1beta1 "github.com/openshift-psap/special-resource-operator/api/v1beta1"
+	srov1beta1 "github.com/openshift-psap/special-resource-operator/apis/v1beta1"
+	srov1beta2 "github.com/openshift-psap/special-resource-operator/apis/v1beta2"
 	"github.com/openshift-psap/special-resource-operator/cmd/cli"
 	"github.com/openshift-psap/special-resource-operator/cmd/leaderelection"
 	"github.com/openshift-psap/special-resource-operator/controllers"
@@ -110,6 +111,16 @@ func main() {
 		scheme,
 		lc,
 		proxyAPI)
+
+	if err = (&srov1beta1.SpecialResource{}).SetupWebhookWithManager(mgr); err != nil {
+		setupLog.Error(err, "unable to create webhook", "webhook", "SpecialResource")
+		os.Exit(1)
+	}
+
+	if err = (&srov1beta2.SpecialResource{}).SetupWebhookWithManager(mgr); err != nil {
+		setupLog.Error(err, "unable to create webhook", "webhook", "SpecialResource")
+		os.Exit(1)
+	}
 
 	if err = (&controllers.SpecialResourceReconciler{Cluster: clusterCluster,
 		ClusterInfo: upgrade.NewClusterInfo(registry.NewRegistry(kubeClient), clusterCluster),

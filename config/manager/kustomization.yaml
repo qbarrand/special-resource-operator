@@ -7,4 +7,4 @@ kind: Kustomization
 images:
 - name: controller
   newName: quay.io/openshift-psap/special-resource-operator
-  newTag: us-master
+  newTag: crd-v1beta2

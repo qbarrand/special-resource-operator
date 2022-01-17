@@ -8,7 +8,7 @@ import (
 	"github.com/golang/mock/gomock"
 	. "github.com/onsi/ginkgo/v2"
 	. "github.com/onsi/gomega"
-	"github.com/openshift-psap/special-resource-operator/api/v1beta1"
+	"github.com/openshift-psap/special-resource-operator/apis/v1beta2"
 	"github.com/openshift-psap/special-resource-operator/internal/controllers/finalizers"
 	"github.com/openshift-psap/special-resource-operator/pkg/clients"
 	"github.com/openshift-psap/special-resource-operator/pkg/poll"
@@ -39,7 +39,7 @@ func TestFinalizers(t *testing.T) {
 
 var _ = Describe("specialResourceFinalizer_AddToSpecialResource", func() {
 	It("should add the finalizer", func() {
-		sr := &v1beta1.SpecialResource{}
+		sr := &v1beta2.SpecialResource{}
 
 		mockKubeClient.EXPECT().Update(context.TODO(), sr)
 
@@ -49,7 +49,7 @@ var _ = Describe("specialResourceFinalizer_AddToSpecialResource", func() {
 	})
 
 	It("should return an error if the object could not be updated", func() {
-		sr := &v1beta1.SpecialResource{}
+		sr := &v1beta2.SpecialResource{}
 
 		randomError := errors.New("random error")
 
@@ -62,7 +62,7 @@ var _ = Describe("specialResourceFinalizer_AddToSpecialResource", func() {
 
 var _ = Describe("specialResourceFinalizer_Finalize", func() {
 	It("should do nothing if the CR does not have the finalizer", func() {
-		sr := &v1beta1.SpecialResource{}
+		sr := &v1beta2.SpecialResource{}
 
 		err := finalizers.NewSpecialResourceFinalizer(mockKubeClient, nil).Finalize(context.TODO(), sr)
 		Expect(err).NotTo(HaveOccurred())
@@ -76,13 +76,13 @@ var _ = Describe("specialResourceFinalizer_Finalize", func() {
 
 		nodeSelector := map[string]string{"key": "value"}
 
-		sr := &v1beta1.SpecialResource{
+		sr := &v1beta2.SpecialResource{
 			ObjectMeta: metav1.ObjectMeta{
 				Name:       srName,
 				Namespace:  srNamespace,
 				Finalizers: []string{finalizers.FinalizerString},
 			},
-			Spec: v1beta1.SpecialResourceSpec{
+			Spec: v1beta2.SpecialResourceSpec{
 				Namespace:    srNamespace,
 				NodeSelector: nodeSelector,
 			},
@@ -114,7 +114,7 @@ var _ = Describe("specialResourceFinalizer_Finalize", func() {
 
 		refs := []metav1.OwnerReference{
 			{
-				APIVersion: "v1beta1",
+				APIVersion: "v1beta2",
 				Kind:       "SpecialResource",
 			},
 		}

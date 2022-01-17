@@ -18,7 +18,7 @@ import (
 	"k8s.io/client-go/tools/clientcmd"
 	"sigs.k8s.io/controller-runtime/pkg/client"
 
-	srov1beta1 "github.com/openshift-psap/special-resource-operator/api/v1beta1"
+	"github.com/openshift-psap/special-resource-operator/apis/v1beta2"
 	"github.com/openshift-psap/special-resource-operator/test/framework"
 	configv1 "github.com/openshift/api/config/v1"
 	ocv1 "github.com/openshift/api/config/v1"
@@ -225,7 +225,7 @@ func WaitClusterOperatorNamespace(clientSet *framework.ClientSet) error {
 // CreatePreamble applies the preamble special resource to kickstart SRO reconcile process
 // if it was deployed from OLM. If not, this operation is idempotent.
 func CreatePreamble(ctx context.Context, cl client.Client) error {
-	specialresources := &srov1beta1.SpecialResourceList{}
+	specialresources := &v1beta2.SpecialResourceList{}
 	err := cl.List(context.TODO(), specialresources, []client.ListOption{}...)
 	if err != nil {
 		return fmt.Errorf("couldn't get SpecialResourceList: %v", err)

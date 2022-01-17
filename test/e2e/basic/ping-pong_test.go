@@ -10,7 +10,7 @@ import (
 	"github.com/kelseyhightower/envconfig"
 	"github.com/onsi/ginkgo/v2"
 	"github.com/onsi/gomega"
-	srov1beta1 "github.com/openshift-psap/special-resource-operator/api/v1beta1"
+	"github.com/openshift-psap/special-resource-operator/apis/v1beta2"
 	"github.com/openshift-psap/special-resource-operator/test/framework"
 	v1 "k8s.io/api/core/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
@@ -130,7 +130,7 @@ func pingPongDelete(ctx context.Context, cl client.Client) error {
 
 func waitPingPongDeleted(cl client.Client) error {
 	err := wait.PollImmediate(pingPongPollInterval, pingPongWaitDuration, func() (bool, error) {
-		specialresources := &srov1beta1.SpecialResourceList{}
+		specialresources := &v1beta2.SpecialResourceList{}
 		err := cl.List(context.Background(), specialresources, []client.ListOption{}...)
 		if err != nil {
 			return false, err

@@ -6,7 +6,7 @@ import (
 	"strings"
 	"time"
 
-	srov1beta1 "github.com/openshift-psap/special-resource-operator/api/v1beta1"
+	"github.com/openshift-psap/special-resource-operator/apis/v1beta2"
 	"github.com/openshift-psap/special-resource-operator/pkg/proxy"
 	"github.com/openshift-psap/special-resource-operator/pkg/upgrade"
 	"github.com/openshift-psap/special-resource-operator/pkg/utils"
@@ -43,7 +43,7 @@ type RuntimeInformation struct {
 	OSImageURL                string                         `json:"osImageURL"`
 	Proxy                     proxy.Configuration            `json:"proxy"`
 	GroupName                 ResourceGroupName              `json:"groupName"`
-	SpecialResource           srov1beta1.SpecialResource     `json:"specialresource"`
+	SpecialResource           v1beta2.SpecialResource        `json:"specialresource"`
 }
 
 var RunInfo = RuntimeInformation{
@@ -62,7 +62,7 @@ var RunInfo = RuntimeInformation{
 	OSImageURL:                "",
 	Proxy:                     proxy.Configuration{},
 	GroupName:                 ResourceGroupName{DriverBuild: "driver-build", DriverContainer: "driver-container", RuntimeEnablement: "runtime-enablement", DevicePlugin: "device-plugin", DeviceMonitoring: "device-monitoring", DeviceDashboard: "device-dashboard", DeviceFeatureDiscovery: "device-feature-discovery", CSIDriver: "csi-driver"},
-	SpecialResource:           srov1beta1.SpecialResource{},
+	SpecialResource:           v1beta2.SpecialResource{},
 }
 
 func logRuntimeInformation() {

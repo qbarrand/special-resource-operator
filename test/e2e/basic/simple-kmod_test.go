@@ -12,7 +12,7 @@ import (
 	"github.com/openshift-psap/special-resource-operator/test/framework"
 	"sigs.k8s.io/controller-runtime/pkg/client"
 
-	srov1beta1 "github.com/openshift-psap/special-resource-operator/api/v1beta1"
+	"github.com/openshift-psap/special-resource-operator/apis/v1beta2"
 	v1 "k8s.io/api/apps/v1"
 	corev1 "k8s.io/api/core/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
@@ -132,7 +132,7 @@ func waitDaemonSetReady(cs *framework.ClientSet) error {
 
 func waitSimpleKmodDeleted(cs *framework.ClientSet, cl client.Client) error {
 	err := wait.PollImmediate(simpleKmodPollInterval, simpleKmodWaitDuration, func() (bool, error) {
-		specialresources := &srov1beta1.SpecialResourceList{}
+		specialresources := &v1beta2.SpecialResourceList{}
 		err := cl.List(context.Background(), specialresources, []client.ListOption{}...)
 		if err != nil {
 			return false, err

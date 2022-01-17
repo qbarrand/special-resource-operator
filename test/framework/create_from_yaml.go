@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"strings"
 
-	srov1beta1 "github.com/openshift-psap/special-resource-operator/api/v1beta1"
+	"github.com/openshift-psap/special-resource-operator/apis/v1beta2"
 	sroscheme "github.com/openshift-psap/special-resource-operator/pkg/scheme"
 	"github.com/openshift-psap/special-resource-operator/pkg/utils"
 	"github.com/openshift-psap/special-resource-operator/pkg/yamlutil"
@@ -28,7 +28,7 @@ var (
 func init() {
 	utilruntime.Must(sroscheme.AddToScheme(scheme))
 	utilruntime.Must(clientgoscheme.AddToScheme(scheme))
-	utilruntime.Must(srov1beta1.AddToScheme(scheme))
+	utilruntime.Must(v1beta2.AddToScheme(scheme))
 
 	ctrl.SetLogger(zap.New(zap.UseDevMode(true)))
 
@@ -130,7 +130,7 @@ func DeleteFromYAML(ctx context.Context, yamlFile []byte, cl client.Client) erro
 
 func DeleteAllSpecialResources(ctx context.Context, cl client.Client) error {
 
-	specialresources := &srov1beta1.SpecialResourceList{}
+	specialresources := &v1beta2.SpecialResourceList{}
 
 	opts := []client.ListOption{}
 	err := cl.List(ctx, specialresources, opts...)

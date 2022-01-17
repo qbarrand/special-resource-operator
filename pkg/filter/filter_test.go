@@ -9,11 +9,11 @@ import (
 	. "github.com/onsi/ginkgo/v2"
 	. "github.com/onsi/gomega"
 	"github.com/onsi/gomega/types"
+	"github.com/openshift-psap/special-resource-operator/apis/v1beta2"
 	appsv1 "k8s.io/api/apps/v1"
 	"sigs.k8s.io/controller-runtime/pkg/event"
 	"sigs.k8s.io/controller-runtime/pkg/log/zap"
 
-	"github.com/openshift-psap/special-resource-operator/api/v1beta1"
 	"github.com/openshift-psap/special-resource-operator/pkg/kernel"
 	"github.com/openshift-psap/special-resource-operator/pkg/lifecycle"
 	"github.com/openshift-psap/special-resource-operator/pkg/storage"
@@ -62,7 +62,7 @@ var _ = Describe("IsSpecialResource", func() {
 		},
 		Entry(
 			Kind,
-			&v1beta1.SpecialResource{
+			&v1beta2.SpecialResource{
 				TypeMeta: metav1.TypeMeta{Kind: Kind},
 			},
 			BeTrue(),
@@ -150,7 +150,7 @@ var _ = Describe("Predicate", func() {
 			},
 			Entry(
 				"special resource",
-				&v1beta1.SpecialResource{},
+				&v1beta2.SpecialResource{},
 				BeTrue(),
 			),
 			Entry(
@@ -347,7 +347,7 @@ var _ = Describe("Predicate", func() {
 				func() {
 					mockKernel.EXPECT().IsObjectAffine(gomock.Any()).Return(false)
 				},
-				&v1beta1.SpecialResource{
+				&v1beta2.SpecialResource{
 					ObjectMeta: metav1.ObjectMeta{
 						OwnerReferences: []metav1.OwnerReference{
 							{Kind: Kind},
@@ -356,7 +356,7 @@ var _ = Describe("Predicate", func() {
 						ResourceVersion: "dummy1",
 					},
 				},
-				&v1beta1.SpecialResource{
+				&v1beta2.SpecialResource{
 					ObjectMeta: metav1.ObjectMeta{
 						OwnerReferences: []metav1.OwnerReference{
 							{Kind: Kind},
@@ -381,7 +381,7 @@ var _ = Describe("Predicate", func() {
 			},
 			Entry(
 				"special resource",
-				&v1beta1.SpecialResource{},
+				&v1beta2.SpecialResource{},
 				BeTrue(),
 			),
 			// TODO(qbarrand) testing this function requires injecting a fake pkg/storage
@@ -405,7 +405,7 @@ var _ = Describe("Predicate", func() {
 			},
 			Entry(
 				"special resource",
-				&v1beta1.SpecialResource{},
+				&v1beta2.SpecialResource{},
 				BeTrue(),
 			),
 			Entry(

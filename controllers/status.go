@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"os"
 
-	srov1beta1 "github.com/openshift-psap/special-resource-operator/api/v1beta1"
+	"github.com/openshift-psap/special-resource-operator/apis/v1beta2"
 	"github.com/openshift-psap/special-resource-operator/pkg/utils"
 	configv1 "github.com/openshift/api/config/v1"
 	operatorv1helpers "github.com/openshift/library-go/pkg/operator/v1helpers"
@@ -19,9 +19,9 @@ import (
 )
 
 // Operator Status
-func (r *SpecialResourceReconciler) operatorStatusUpdate(ctx context.Context, sr *srov1beta1.SpecialResource, state string) {
+func (r *SpecialResourceReconciler) operatorStatusUpdate(ctx context.Context, sr *v1beta2.SpecialResource, state string) {
 
-	update := srov1beta1.SpecialResource{}
+	update := v1beta2.SpecialResource{}
 
 	// If we cannot find the SR than something bad is going on ..
 	objectKey := types.NamespacedName{Name: sr.GetName(), Namespace: sr.GetNamespace()}
@@ -143,7 +143,7 @@ func (r *SpecialResourceReconciler) clusterOperatorUpdateRelatedObjects(ctx cont
 	}
 
 	// Get all specialresource objects
-	specialresources := &srov1beta1.SpecialResourceList{}
+	specialresources := &v1beta2.SpecialResourceList{}
 	err := r.KubeClient.List(ctx, specialresources, []client.ListOption{}...)
 	if err != nil {
 		return err

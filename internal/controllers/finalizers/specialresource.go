@@ -6,7 +6,7 @@ import (
 	"strings"
 
 	"github.com/go-logr/logr"
-	"github.com/openshift-psap/special-resource-operator/api/v1beta1"
+	"github.com/openshift-psap/special-resource-operator/apis/v1beta2"
 	"github.com/openshift-psap/special-resource-operator/pkg/clients"
 	"github.com/openshift-psap/special-resource-operator/pkg/poll"
 	"github.com/openshift-psap/special-resource-operator/pkg/state"
@@ -22,8 +22,8 @@ import (
 const FinalizerString = "sro.openshift.io/finalizer"
 
 type SpecialResourceFinalizer interface {
-	AddToSpecialResource(ctx context.Context, sr *v1beta1.SpecialResource) error
-	Finalize(ctx context.Context, sr *v1beta1.SpecialResource) error
+	AddToSpecialResource(ctx context.Context, sr *v1beta2.SpecialResource) error
+	Finalize(ctx context.Context, sr *v1beta2.SpecialResource) error
 }
 
 type specialResourceFinalizer struct {
@@ -43,7 +43,7 @@ func NewSpecialResourceFinalizer(
 	}
 }
 
-func (srf *specialResourceFinalizer) AddToSpecialResource(ctx context.Context, sr *v1beta1.SpecialResource) error {
+func (srf *specialResourceFinalizer) AddToSpecialResource(ctx context.Context, sr *v1beta2.SpecialResource) error {
 	srf.log.Info("Adding finalizer to special resource")
 	controllerutil.AddFinalizer(sr, FinalizerString)
 
@@ -56,7 +56,7 @@ func (srf *specialResourceFinalizer) AddToSpecialResource(ctx context.Context, s
 	return nil
 }
 
-func (srf *specialResourceFinalizer) Finalize(ctx context.Context, sr *v1beta1.SpecialResource) error {
+func (srf *specialResourceFinalizer) Finalize(ctx context.Context, sr *v1beta2.SpecialResource) error {
 	if utils.StringSliceContains(sr.GetFinalizers(), FinalizerString) {
 		// Run finalization logic for specialresource
 		if err := srf.finalizeSpecialResource(ctx, sr); err != nil {
@@ -74,7 +74,7 @@ func (srf *specialResourceFinalizer) Finalize(ctx context.Context, sr *v1beta1.S
 	return nil
 }
 
-func (srf *specialResourceFinalizer) finalizeNodes(ctx context.Context, sr *v1beta1.SpecialResource, remove string) error {
+func (srf *specialResourceFinalizer) finalizeNodes(ctx context.Context, sr *v1beta2.SpecialResource, remove string) error {
 	nodes, err := srf.kubeClient.GetNodesByLabels(ctx, sr.Spec.NodeSelector)
 	if err != nil {
 		return fmt.Errorf("could not fetch nodes: %v", err)
@@ -104,7 +104,7 @@ func (srf *specialResourceFinalizer) finalizeNodes(ctx context.Context, sr *v1be
 	return nil
 }
 
-func (srf *specialResourceFinalizer) finalizeSpecialResource(ctx context.Context, sr *v1beta1.SpecialResource) error {
+func (srf *specialResourceFinalizer) finalizeSpecialResource(ctx context.Context, sr *v1beta2.SpecialResource) error {
 	// TODO(user): Add the cleanup steps that the operator
 	// needs to do before the CR can be deleted. Examples
 	// of finalizers include performing backups and deleting

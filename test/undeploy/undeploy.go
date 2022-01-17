@@ -7,7 +7,7 @@ import (
 	"os"
 	"time"
 
-	srov1beta1 "github.com/openshift-psap/special-resource-operator/api/v1beta1"
+	"github.com/openshift-psap/special-resource-operator/apis/v1beta2"
 	"github.com/openshift-psap/special-resource-operator/pkg/assets"
 	sroscheme "github.com/openshift-psap/special-resource-operator/pkg/scheme"
 	"github.com/openshift-psap/special-resource-operator/test/framework"
@@ -24,7 +24,7 @@ func init() {
 
 	utilruntime.Must(sroscheme.AddToScheme(scheme))
 	utilruntime.Must(clientgoscheme.AddToScheme(scheme))
-	utilruntime.Must(srov1beta1.AddToScheme(scheme))
+	utilruntime.Must(v1beta2.AddToScheme(scheme))
 }
 
 func main() {

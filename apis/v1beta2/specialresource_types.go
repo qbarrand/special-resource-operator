@@ -14,7 +14,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-package v1beta1
+package v1beta2
 
 import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
@@ -22,78 +22,6 @@ import (
 
 	helmerv1beta1 "github.com/openshift-psap/special-resource-operator/pkg/helmer/api/v1beta1"
 )
-
-// SpecialResourceImages is not used.
-// TODO(qbarrand) check if this type can be removed
-type SpecialResourceImages struct {
-	Name       string                 `json:"name"`
-	Kind       string                 `json:"kind"`
-	Namespace  string                 `json:"namespace"`
-	PullSecret string                 `json:"pullsecret,omitempty"`
-	Paths      []SpecialResourcePaths `json:"path"`
-}
-
-// SpecialResourceClaims is not used.
-// TODO(qbarrand) check if this type can be removed
-type SpecialResourceClaims struct {
-	Name      string `json:"name"`
-	MountPath string `json:"mountPath"`
-}
-
-// SpecialResourcePaths is not used.
-// TODO(qbarrand) check if this type can be removed
-type SpecialResourcePaths struct {
-	SourcePath     string `json:"sourcePath"`
-	DestinationDir string `json:"destinationDir"`
-}
-
-// SpecialResourceArtifacts is not used.
-// TODO(qbarrand) check if this type can be removed
-type SpecialResourceArtifacts struct {
-	// +kubebuilder:validation:Optional
-	HostPaths []SpecialResourcePaths `json:"hostPaths,omitempty"`
-	// +kubebuilder:validation:Optional
-	Images []SpecialResourceImages `json:"images,omitempty"`
-	// +kubebuilder:validation:Optional
-	Claims []SpecialResourceClaims `json:"claims,omitempty"`
-}
-
-// SpecialResourceBuildArgs is not used.
-// TODO(qbarrand) check if this type can be removed
-type SpecialResourceBuildArgs struct {
-	Name  string `json:"name"`
-	Value string `json:"value"`
-}
-
-// SpecialResourceConfiguration is not used.
-// TODO(qbarrand) check if this type can be removed
-type SpecialResourceConfiguration struct {
-	Name  string   `json:"name"`
-	Value []string `json:"value"`
-}
-
-// SpecialResourceGit is not used.
-// TODO(qbarrand) check if this type can be removed
-type SpecialResourceGit struct {
-	Ref string `json:"ref"`
-	Uri string `json:"uri"`
-}
-
-// SpecialResourceSource is not used.
-// TODO(qbarrand) check if this type can be removed
-type SpecialResourceSource struct {
-	Git SpecialResourceGit `json:"git,omitempty"`
-}
-
-// SpecialResourceDriverContainer is not used.
-// TODO(qbarrand) check if this type can be removed
-type SpecialResourceDriverContainer struct {
-	// +kubebuilder:validation:Optional
-	Source SpecialResourceSource `json:"source,omitempty"`
-
-	// +kubebuilder:validation:Optional
-	Artifacts SpecialResourceArtifacts `json:"artifacts,omitempty"`
-}
 
 // SpecialResourceSpec describes the desired state of the resource, such as the recipe to be used and a selector
 // on which nodes it should be installed.
@@ -108,10 +36,6 @@ type SpecialResourceSpec struct {
 	// +kubebuilder:validation:Required
 	Namespace string `json:"namespace"`
 
-	// ForceUpgrade is not used.
-	// +kubebuilder:validation:Optional
-	ForceUpgrade bool `json:"forceUpgrade"`
-
 	// If Debug is true, additional debugging output will be written in the log file.
 	// +kubebuilder:validation:Optional
 	Debug bool `json:"debug"`
@@ -121,11 +45,6 @@ type SpecialResourceSpec struct {
 	// +kubebuilder:pruning:PreserveUnknownFields
 	// +kubebuilder:validation:EmbeddedResource
 	Set unstructured.Unstructured `json:"set,omitempty"`
-
-	// DriverContainer is not used.
-	// TODO(qbarrand) check if this field can be removed
-	// +kubebuilder:validation:Optional
-	DriverContainer SpecialResourceDriverContainer `json:"driverContainer,omitempty"`
 
 	// NodeSelector is used to determine on which nodes the soiftware stack should be installed.
 	// +kubebuilder:validation:Optional
@@ -157,6 +76,7 @@ type SpecialResourceStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // SpecialResource describes a software stack for hardware accelerators on an existing Kubernetes cluster.
 // +kubebuilder:resource:path=specialresources,scope=Cluster

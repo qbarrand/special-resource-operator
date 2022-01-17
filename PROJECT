@@ -7,8 +7,14 @@ resources:
   domain: openshift.io
   group: sro
   kind: SpecialResource
-  path: github.com/openshift-psap/special-resource-operator/api/v1beta1
+  path: github.com/openshift-psap/special-resource-operator/apis/v1beta1
   version: v1beta1
+- controller: true
+  domain: k8s-sigs.io
+  group: sro
+  kind: SpecialResource
+  path: github.com/openshift-psap/special-resource-operator/apis/v1beta2
+  version: v1beta2
 version: "3"
 plugins:
   manifests.sdk.operatorframework.io/v2: {}

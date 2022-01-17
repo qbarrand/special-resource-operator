@@ -20,7 +20,7 @@ import (
 	"context"
 
 	"github.com/go-logr/logr"
-	srov1beta1 "github.com/openshift-psap/special-resource-operator/api/v1beta1"
+	"github.com/openshift-psap/special-resource-operator/apis/v1beta2"
 	"github.com/openshift-psap/special-resource-operator/internal/controllers/finalizers"
 	"github.com/openshift-psap/special-resource-operator/pkg/assets"
 	"github.com/openshift-psap/special-resource-operator/pkg/clients"
@@ -78,11 +78,11 @@ type SpecialResourceReconciler struct {
 	ProxyAPI    proxy.ProxyAPI
 	KubeClient  clients.ClientsInterface
 
-	specialresource srov1beta1.SpecialResource
-	parent          srov1beta1.SpecialResource
+	specialresource v1beta2.SpecialResource
+	parent          v1beta2.SpecialResource
 	chart           chart.Chart
 	values          unstructured.Unstructured
-	dependency      srov1beta1.SpecialResourceDependency
+	dependency      v1beta2.SpecialResourceDependency
 	clusterOperator configv1.ClusterOperator
 }
 
@@ -138,7 +138,7 @@ func (r *SpecialResourceReconciler) SetupWithManager(mgr ctrl.Manager) error {
 
 	if platform == "OCP" {
 		return ctrl.NewControllerManagedBy(mgr).
-			For(&srov1beta1.SpecialResource{}).
+			For(&v1beta2.SpecialResource{}).
 			Owns(&v1.Pod{}).
 			Owns(&appsv1.DaemonSet{}).
 			Owns(&appsv1.Deployment{}).
@@ -161,7 +161,7 @@ func (r *SpecialResourceReconciler) SetupWithManager(mgr ctrl.Manager) error {
 	} else {
 		log.Info("Warning: assuming vanilla K8s. Manager will own a limited set of resources.")
 		return ctrl.NewControllerManagedBy(mgr).
-			For(&srov1beta1.SpecialResource{}).
+			For(&v1beta2.SpecialResource{}).
 			Owns(&v1.Pod{}).
 			Owns(&appsv1.DaemonSet{}).
 			Owns(&appsv1.Deployment{}).

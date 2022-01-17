@@ -8,7 +8,7 @@ import (
 	"os"
 	"text/template"
 
-	srov1beta1 "github.com/openshift-psap/special-resource-operator/api/v1beta1"
+	"github.com/openshift-psap/special-resource-operator/apis/v1beta2"
 	"github.com/openshift-psap/special-resource-operator/internal/controllers/finalizers"
 	helmerv1beta1 "github.com/openshift-psap/special-resource-operator/pkg/helmer/api/v1beta1"
 	"github.com/openshift-psap/special-resource-operator/pkg/utils"
@@ -33,7 +33,7 @@ func SpecialResourcesReconcile(ctx context.Context, r *SpecialResourceReconciler
 
 	log.Info("Reconciling SpecialResource(s) in all Namespaces")
 
-	specialresources := &srov1beta1.SpecialResourceList{}
+	specialresources := &v1beta2.SpecialResourceList{}
 
 	opts := []client.ListOption{}
 	err := r.KubeClient.List(ctx, specialresources, opts...)
@@ -119,7 +119,7 @@ func SpecialResourcesReconcile(ctx context.Context, r *SpecialResourceReconciler
 			return reconcile.Result{}, err
 		}
 
-		var child srov1beta1.SpecialResource
+		var child v1beta2.SpecialResource
 		// Assign the specialresource to the reconciler object
 		if child, err = getDependencyFrom(specialresources, r.dependency.Name); err != nil {
 			log.Error(err, "Could not get SpecialResource dependency")
@@ -192,7 +192,7 @@ func TemplateFragment(sr interface{}) error {
 	return json.Unmarshal(buff.Bytes(), sr)
 }
 
-func ReconcileSpecialResourceChart(ctx context.Context, r *SpecialResourceReconciler, sr srov1beta1.SpecialResource, chart *chart.Chart, values unstructured.Unstructured) error {
+func ReconcileSpecialResourceChart(ctx context.Context, r *SpecialResourceReconciler, sr v1beta2.SpecialResource, chart *chart.Chart, values unstructured.Unstructured) error {
 
 	r.specialresource = sr
 	r.chart = *chart
@@ -268,7 +268,7 @@ func ReconcileSpecialResourceChart(ctx context.Context, r *SpecialResourceReconc
 	return ReconcileChart(ctx, r)
 }
 
-func FindSR(a []srov1beta1.SpecialResource, x string, by string) (int, bool) {
+func FindSR(a []v1beta2.SpecialResource, x string, by string) (int, bool) {
 	for i, n := range a {
 		if by == "Name" {
 			if x == n.GetName() {
@@ -279,14 +279,14 @@ func FindSR(a []srov1beta1.SpecialResource, x string, by string) (int, bool) {
 	return -1, false
 }
 
-func getDependencyFrom(specialresources *srov1beta1.SpecialResourceList, name string) (srov1beta1.SpecialResource, error) {
+func getDependencyFrom(specialresources *v1beta2.SpecialResourceList, name string) (v1beta2.SpecialResource, error) {
 
 	log.Info("Looking for SpecialResource in fetched List (all namespaces)")
 	if idx, found := FindSR(specialresources.Items, name, "Name"); found {
 		return specialresources.Items[idx], nil
 	}
 
-	return srov1beta1.SpecialResource{}, errors.New("Not found")
+	return v1beta2.SpecialResource{}, errors.New("Not found")
 }
 
 func noop() error {
@@ -299,7 +299,7 @@ func createSpecialResourceFrom(ctx context.Context, r *SpecialResourceReconciler
 	vals.SetKind("Values")
 	vals.SetAPIVersion("sro.openshift.io/v1beta1")
 
-	sr := srov1beta1.SpecialResource{}
+	sr := v1beta2.SpecialResource{}
 	sr.Name = ch.Metadata.Name
 	sr.Spec.Namespace = sr.Name
 	sr.Spec.Chart.Name = sr.Name
@@ -308,7 +308,7 @@ func createSpecialResourceFrom(ctx context.Context, r *SpecialResourceReconciler
 	sr.Spec.Chart.Repository.URL = dp.Repository.URL
 	sr.Spec.Chart.Tags = make([]string, 0)
 	sr.Spec.Set = vals
-	sr.Spec.Dependencies = make([]srov1beta1.SpecialResourceDependency, 0)
+	sr.Spec.Dependencies = make([]v1beta2.SpecialResourceDependency, 0)
 
 	var idx int
 	if idx = utils.FindCRFile(ch.Files, r.dependency.Name); idx == -1 {
