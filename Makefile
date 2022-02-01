@@ -115,7 +115,7 @@ uninstall: manifests kustomize  ## Uninstall CRDs from the K8s cluster specified
 
 deploy: manifests kustomize configure ## Deploy controller in the configured Kubernetes cluster in ~/.kube/config
 	$(KUSTOMIZE) build config/namespace | $(CLUSTER_CLIENT) apply -f -
-	$(KUSTOMIZE) build config/default$(SUFFIX) | $(CLUSTER_CLIENT) apply -f -
+	$(KUSTOMIZE) build config/default | $(CLUSTER_CLIENT) apply -f -
 	$(shell sleep 5)
 	$(KUSTOMIZE) build config/cr | $(CLUSTER_CLIENT) apply -f -
 
@@ -128,7 +128,7 @@ undeploy: kustomize ## Undeploy controller from the K8s cluster specified in ~/.
 	# Give SRO time to reconcile
 	sleep 10
 	$(KUSTOMIZE) build config/namespace | $(CLUSTER_CLIENT) delete --ignore-not-found -f -
-	$(KUSTOMIZE) build config/default$(SUFFIX) | $(CLUSTER_CLIENT) delete --ignore-not-found -f -
+	$(KUSTOMIZE) build config/default | $(CLUSTER_CLIENT) delete --ignore-not-found -f -
 
 
 # SRO specific configuration to set namespace of all manifests
