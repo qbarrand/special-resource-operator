@@ -1,6 +1,6 @@
 name: e2e
 
-on: [pull_request]
+on: [push]
 
 jobs:
   privilege-escalation:
@@ -10,14 +10,9 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
-      - name: Install curl
-        run: |
-          sudo apt -y update
-          sudo apt -y install curl
-
       - name: Download and install minikube
         run: |
-          curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube_latest_amd64.deb
+          wget https://storage.googleapis.com/minikube/releases/latest/minikube_latest_amd64.deb
           sudo dpkg -i ./minikube_latest_amd64.deb
 
       - name: Start minikube and wait until minikube's CoreDNS is available
@@ -98,14 +93,9 @@ jobs:
         run: make KERNEL_SRC_DIR="/usr/src/linux-headers-${KERNEL_VERSION}"
         working-directory: ci/sro-kmod
 
-      - name: Install curl
-        run: |
-          sudo apt -y update
-          sudo apt -y install curl
-
       - name: Download and install minikube
         run: |
-          curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube_latest_amd64.deb
+          wget https://storage.googleapis.com/minikube/releases/latest/minikube_latest_amd64.deb
           sudo dpkg -i ./minikube_latest_amd64.deb
 
       - name: Start minikube and wait until CoreDNS is available
