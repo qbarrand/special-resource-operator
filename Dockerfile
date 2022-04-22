@@ -28,8 +28,7 @@ RUN ["make", "helm-repo-index", "manager", "helm-plugins/cm-getter/cm-getter"]
 
 FROM debian:bullseye-slim
 
-RUN ["apt", "update"]
-RUN ["apt", "install", "-y", "ca-certificates"]
+RUN apt update && apt install -y ca-certificates
 
 WORKDIR /
 
